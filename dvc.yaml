@@ -1,23 +1,77 @@
 stages:
-  build_manifest:
-    cmd: python scripts/build_manifest.py
-    deps:
-    - data/raw/en/wav
-    - scripts/build_manifest.py
-    outs:
-    - data/manifests/clean.jsonl
   prepare_subset:
     cmd: python scripts/get_commonvoice_subset.py
     deps:
-    - scripts/get_commonvoice_subset.py
-    - sps-corpus-1.0-2025-11-25-en
+      - scripts/get_commonvoice_subset.py
+      - sps-corpus-1.0-2025-11-25-en
+      - params.yaml
     outs:
-    - data/raw/en/wav
+      - data/raw/en/wav
+
+  build_manifest:
+    cmd: python scripts/build_manifest.py
+    deps:
+      - scripts/build_manifest.py
+      - data/raw/en/wav
+      - params.yaml
+    outs:
+      - data/manifests/clean.jsonl
+
   add_noise:
     cmd: python scripts/add_noise.py
     deps:
-    - data/manifests/clean.jsonl
-    - scripts/add_noise.py
+      - scripts/add_noise.py
+      - data/manifests/clean.jsonl
+      - params.yaml
     outs:
-    - data/manifests/noisy.jsonl
-    - data/noisy
+      - data/noisy
+      - data/manifests/noisy_0db.jsonl
+      - data/manifests/noisy_5db.jsonl
+      - data/manifests/noisy_10db.jsonl
+      - data/manifests/noisy_15db.jsonl
+      - data/manifests/noisy_20db.jsonl
+      - data/manifests/noisy_25db.jsonl
+      - data/manifests/noisy_30db.jsonl
+
+  predict_phonemes:
+    cmd: python scripts/predict_phonemes.py
+    deps:
+      - scripts/predict_phonemes.py
+      - data/manifests/noisy_0db.jsonl
+      - data/manifests/noisy_5db.jsonl
+      - data/manifests/noisy_10db.jsonl
+      - data/manifests/noisy_15db.jsonl
+      - data/manifests/noisy_20db.jsonl
+      - data/manifests/noisy_25db.jsonl
+      - data/manifests/noisy_30db.jsonl
+      - params.yaml
+    outs:
+      - data/manifests/predictions_0db.jsonl
+      - data/manifests/predictions_5db.jsonl
+      - data/manifests/predictions_10db.jsonl
+      - data/manifests/predictions_15db.jsonl
+      - data/manifests/predictions_20db.jsonl
+      - data/manifests/predictions_25db.jsonl
+      - data/manifests/predictions_30db.jsonl
+
+  evaluate_per:
+    cmd: python scripts/evaluate_per.py
+    deps:
+      - scripts/evaluate_per.py
+      - data/manifests/predictions_0db.jsonl
+      - data/manifests/predictions_5db.jsonl
+      - data/manifests/predictions_10db.jsonl
+      - data/manifests/predictions_15db.jsonl
+      - data/manifests/predictions_20db.jsonl
+      - data/manifests/predictions_25db.jsonl
+      - data/manifests/predictions_30db.jsonl
+    metrics:
+      - data/results/per.json
+
+  plot_per_curve:
+    cmd: python scripts/plot_per_curve.py
+    deps:
+      - scripts/plot_per_curve.py
+      - data/results/per.json
+    outs:
+      - data/results/per_curve.png
