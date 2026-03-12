@@ -29,7 +29,7 @@ def phonemize_text(text):
         capture_output=True,
         text=True
     )
-    return result.stdout.strip()
+    return result.stdout.strip() #result.stdout.replace("\n", " ").strip()
 
 
 with open(MANIFEST_PATH, "w") as manifest:
@@ -54,5 +54,5 @@ with open(MANIFEST_PATH, "w") as manifest:
             "ref_phon": phonemes,
             "audio_md5": audio_md5
         }
-        manifest.write(json.dumps(entry) + "\n")
+        manifest.write(json.dumps(entry, ensure_ascii=False) + "\n")
 print("Manifest created.")
