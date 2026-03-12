@@ -1,4 +1,4 @@
-# ASR Pipeline
+# DVC pipeline for phoneme ASR robustness to noise
 
 This project implements an experimental pipeline to evaluate the robustness of an Automatic Speech Recognition (ASR) phoneme model under different noise conditions.
 
@@ -66,4 +66,5 @@ per.json – PER metrics for each SNR level
 
 
 per_curve.png – performance curve showing PER vs noise level
+
 
