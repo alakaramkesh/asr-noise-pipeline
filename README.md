@@ -45,6 +45,7 @@ On Ubuntu / WSL:
 
 ```bash
 sudo apt install espeak-ng
+```
 Create and activate a virtual environment:
 
 ```bash
@@ -65,3 +66,4 @@ per.json – PER metrics for each SNR level
 
 
 per_curve.png – performance curve showing PER vs noise level
+
