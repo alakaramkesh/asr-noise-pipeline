@@ -1,4 +1,4 @@
-# ASR Noise Robustness Pipeline
+# ASR Pipeline
 
 This project implements an experimental pipeline to evaluate the robustness of an Automatic Speech Recognition (ASR) phoneme model under different noise conditions.
 
@@ -40,6 +40,11 @@ Before running the pipeline, make sure you have:
 
 ## Running the Pipeline
 
+This project requires the `espeak-ng` phonemizer to generate reference phoneme sequences.
+On Ubuntu / WSL:
+
+```bash
+sudo apt install espeak-ng
 Create and activate a virtual environment:
 
 ```bash
@@ -57,5 +62,6 @@ dvc repro
 The final output includes:
 
 per.json – PER metrics for each SNR level
+
 
 per_curve.png – performance curve showing PER vs noise level
