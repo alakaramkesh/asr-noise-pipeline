@@ -1,0 +1,44 @@
+[
+  {
+    "snr_db": 0,
+    "total_phonemes": 403,
+    "total_edits": 589,
+    "per": 1.4615384615384615
+  },
+  {
+    "snr_db": 5,
+    "total_phonemes": 403,
+    "total_edits": 869,
+    "per": 2.1563275434243176
+  },
+  {
+    "snr_db": 10,
+    "total_phonemes": 403,
+    "total_edits": 1037,
+    "per": 2.5732009925558312
+  },
+  {
+    "snr_db": 15,
+    "total_phonemes": 403,
+    "total_edits": 1240,
+    "per": 3.076923076923077
+  },
+  {
+    "snr_db": 20,
+    "total_phonemes": 403,
+    "total_edits": 1398,
+    "per": 3.468982630272953
+  },
+  {
+    "snr_db": 25,
+    "total_phonemes": 403,
+    "total_edits": 1457,
+    "per": 3.6153846153846154
+  },
+  {
+    "snr_db": 30,
+    "total_phonemes": 403,
+    "total_edits": 1463,
+    "per": 3.630272952853598
+  }
+]
