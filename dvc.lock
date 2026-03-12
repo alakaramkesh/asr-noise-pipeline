@@ -1,0 +1,64 @@
+schema: '2.0'
+stages:
+  prepare_subset:
+    cmd: python scripts/get_commonvoice_subset.py
+    deps:
+    - path: scripts/get_commonvoice_subset.py
+      hash: md5
+      md5: 571a9853c0e33113e5258dce693d63ee
+      size: 1791
+      isexec: true
+    - path: sps-corpus-1.0-2025-11-25-en
+      hash: md5
+      md5: 0713e0ad1944e23c09579d43ed145dbf.dir
+      size: 138889790
+      nfiles: 1370
+    outs:
+    - path: data/raw/en/wav
+      hash: md5
+      md5: a843d47a2c99b9e528d87535c17e6302.dir
+      size: 9158840
+      nfiles: 40
+  build_manifest:
+    cmd: python scripts/build_manifest.py
+    deps:
+    - path: data/raw/en/wav
+      hash: md5
+      md5: a843d47a2c99b9e528d87535c17e6302.dir
+      size: 9158840
+      nfiles: 40
+    - path: scripts/build_manifest.py
+      hash: md5
+      md5: 21cb15b7161982f446957032bad3a0b0
+      size: 1767
+      isexec: true
+    outs:
+    - path: data/manifests/clean.jsonl
+      hash: md5
+      md5: 5afc0244c26c4ff484cd3e3eff7713ab
+      size: 14419
+      isexec: true
+  add_noise:
+    cmd: python scripts/add_noise.py
+    deps:
+    - path: data/manifests/clean.jsonl
+      hash: md5
+      md5: 5afc0244c26c4ff484cd3e3eff7713ab
+      size: 14419
+      isexec: true
+    - path: scripts/add_noise.py
+      hash: md5
+      md5: bf72758145a31a0877245749ab68c814
+      size: 2325
+      isexec: true
+    outs:
+    - path: data/manifests/noisy.jsonl
+      hash: md5
+      md5: d9a592ca52bfde4e64f9879f5941b0ff
+      size: 14599
+      isexec: true
+    - path: data/noisy
+      hash: md5
+      md5: 23c71e31499da005c855ac7f1f900295.dir
+      size: 9155824
+      nfiles: 20

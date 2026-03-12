@@ -1,0 +1,5 @@
+.venv/
+*.tar.gz
+sps-corpus-1.0-2025-11-25-en/
+data/raw/
+data/noisy/

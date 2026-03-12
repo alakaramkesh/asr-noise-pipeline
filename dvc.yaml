@@ -1,0 +1,23 @@
+stages:
+  build_manifest:
+    cmd: python scripts/build_manifest.py
+    deps:
+    - data/raw/en/wav
+    - scripts/build_manifest.py
+    outs:
+    - data/manifests/clean.jsonl
+  prepare_subset:
+    cmd: python scripts/get_commonvoice_subset.py
+    deps:
+    - scripts/get_commonvoice_subset.py
+    - sps-corpus-1.0-2025-11-25-en
+    outs:
+    - data/raw/en/wav
+  add_noise:
+    cmd: python scripts/add_noise.py
+    deps:
+    - data/manifests/clean.jsonl
+    - scripts/add_noise.py
+    outs:
+    - data/manifests/noisy.jsonl
+    - data/noisy
